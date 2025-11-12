@@ -2,8 +2,8 @@ name: Keep Render Alive
 
 on:
   schedule:
-    - cron: "7 * * * *"  # 매시 07분에 실행
-  workflow_dispatch:      # 수동 실행도 가능
+    - cron: "7,17,27,37,47,57 * * * *"  # 매시 7,17,27,37,47,57분에 실행
+  workflow_dispatch:                     # 수동 실행도 가능
 
 jobs:
   ping:
