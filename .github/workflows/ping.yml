@@ -2,7 +2,7 @@ name: Keep Render Alive
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # 매 10분마다 실행
+    - cron: "*/10 * * * *"  # 매 10분마다 실행 (UTC 기준)
   workflow_dispatch:         # 수동 실행 가능
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: keep-render-alive
-      cancel-in-progress: false  # 이전 실행이 있어도 다음 실행 예약
+      cancel-in-progress: false  # 이전 실행이 있어도 다음 스케줄 예약 유지
     steps:
       - name: Add small random delay
         run: |
@@ -27,5 +27,6 @@ jobs:
             https://analysis-3f15.onrender.com
           do
             echo "Pinging $url..."
+            # 실패해도 워크플로우 중단 방지
             curl -I $url || echo "Ping to $url failed"
           done
